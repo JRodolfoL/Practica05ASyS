@@ -379,10 +379,11 @@ stem(W0*nn,angle(absdn),<span class="string">'LineWidth'</span>,2) <span class="
 title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
 xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
 grid on</pre>
-
+<img src="ASySPrac05JoseRodolfoLopezGalvan-1.png" alt="ASySPrac05JoseRodolfoLopezGalvan-1.png">
 <p><i>Trigonometrica compacta</i></p>
 
-<pre class="oct-code">T0=2;
+<pre class="oct-code">figure();
+T0=2;
 W0=2*pi/T0;
 a=2;
 m=15;
@@ -471,11 +472,11 @@ stem(W0*nn,angle(absdnn),<span class="string">'LineWidth'</span>,2) <span class=
 title(<span class="string">'Espectro de fase \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
 xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
 grid on</pre>
-<h2><a id="node3">Ejercicio 3</a></h2>
+<img src="ASySPrac05JoseRodolfoLopezGalvan-2.png" alt="ASySPrac05JoseRodolfoLopezGalvan-2.png"><h2><a id="node3">Ejercicio 3</a></h2>
 <pre class="oct-code"><span class="comment">%Ejercicio de Karla</span>
 
-clearvars;
-
+clear;
+figure();
 
 T0=2*pi;
 W0=2*pi/T0;
@@ -489,9 +490,9 @@ Sfc=D0;
     Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
 <span class="keyword">end</span>
 
-figure (2);
-hFig = figure(2);
-set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+figure (3);
+hFiggg = figure(3);
+set(hFiggg, <span class="string">'Position'</span>, [0 0 900 900])
 subplot(3,2,1)
 plot(t,Sfc,<span class="string">'LineWidth'</span>,2)
 grid on
@@ -524,7 +525,7 @@ grid on
 
 subplot(3,2,6)
 area(t,Ec.^2)
-legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'northeast'</span>)
 xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
 axis auto
 grid on
@@ -553,10 +554,9 @@ title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class
 xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
 grid on</pre>
 
-<pre class="oct-code-output">warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
-warning: division by zero
+<pre class="oct-code-output">warning: division by zero
 </pre>
-
+<img src="ASySPrac05JoseRodolfoLopezGalvan-3.png" alt="ASySPrac05JoseRodolfoLopezGalvan-3.png">
 <footer>
 <hr>
 <a href="https://www.octave.org">Published with GNU Octave 5.2.0</a>
@@ -784,6 +784,7 @@ grid on
 %%
 % _Trigonometrica compacta_
 
+figure();
 T0=2;
 W0=2*pi/T0;
 a=2;
@@ -878,8 +879,8 @@ grid on
 %% Ejercicio 3
 %Ejercicio de Karla
 
-clearvars;
-
+clear;
+figure();
 
 T0=2*pi;
 W0=2*pi/T0;
@@ -893,9 +894,9 @@ for n=1:m
     Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
 end
 
-figure (2);
-hFig = figure(2);
-set(hFig, 'Position', [0 0 900 900])
+figure (3);
+hFiggg = figure(3);
+set(hFiggg, 'Position', [0 0 900 900])
 subplot(3,2,1)
 plot(t,Sfc,'LineWidth',2)
 grid on
@@ -928,7 +929,7 @@ grid on
 
 subplot(3,2,6)
 area(t,Ec.^2)
-legend('Energia del error','Location','Best')
+legend('Energia del error','Location','northeast')
 xlabel('t','FontWeight','bold','FontSize',16)
 axis auto
 grid on

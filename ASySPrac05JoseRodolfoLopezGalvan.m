@@ -219,6 +219,7 @@ grid on
 %% 
 % _Trigonometrica compacta_
 
+figure();
 T0=2;
 W0=2*pi/T0;
 a=2;
@@ -313,8 +314,8 @@ grid on
 %% Ejercicio 3
 %Ejercicio de Karla
 
-clearvars;
-
+clear;
+figure();
 
 T0=2*pi;
 W0=2*pi/T0;
@@ -328,9 +329,9 @@ for n=1:m
     Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
 end
 
-figure (2);
-hFig = figure(2);
-set(hFig, 'Position', [0 0 900 900])
+figure (3);
+hFiggg = figure(3);
+set(hFiggg, 'Position', [0 0 900 900])
 subplot(3,2,1)
 plot(t,Sfc,'LineWidth',2)
 grid on
@@ -363,7 +364,7 @@ grid on
 
 subplot(3,2,6)
 area(t,Ec.^2)
-legend('Energia del error','Location','Best')
+legend('Energia del error','Location','northeast')
 xlabel('t','FontWeight','bold','FontSize',16)
 axis auto
 grid on
