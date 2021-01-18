@@ -174,7 +174,7 @@ plot(t,f(t),'r','LineWidth',0.75)
 grid on
 hold on
 plot(t,Sfc,'b','LineWidth',1.5)
-legend('Función original','Serie de Fourier ','Location','Best')
+legend('Función original','Serie de Fourier ','Location','northeast')
 xlabel('t','FontWeight','bold','FontSize',16)
 axis auto
 
@@ -188,7 +188,7 @@ grid on
 
 subplot(3,2,6)
 area(t,Ec.^2)
-legend('Energia del error','Location','Best')
+legend('Energia del error','Location','northeast')
 xlabel('t','FontWeight','bold','FontSize',16)
 axis auto
 grid on
@@ -254,7 +254,7 @@ plot(t,f(t),'r','LineWidth',0.75)
 grid on
 hold on
 plot(t,Sft,'b','LineWidth',1.5)
-legend('Función original','Serie de Fourier ','Location','Best')
+legend('Función original','Serie de Fourier ','Location','northeast')
 xlabel('t','FontWeight','bold','FontSize',16)
 axis auto
 
@@ -268,7 +268,7 @@ grid on
 
 subplot(3,2,6)
 area(t,Et.^2)
-legend('Energia del error','Location','Best')
+legend('Energia del error','Location','northeast')
 xlabel('t','FontWeight','bold','FontSize',16)
 axis auto
 grid on
@@ -311,7 +311,10 @@ grid on
 
 
 %% Ejercicio 3
-clf;
+%Ejercicio de Karla
+
+clearvars;
+
 
 T0=2*pi;
 W0=2*pi/T0;
@@ -325,8 +328,8 @@ for n=1:m
     Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
 end
 
-figure (1);
-hFig = figure(1);
+figure (2);
+hFig = figure(2);
 set(hFig, 'Position', [0 0 900 900])
 subplot(3,2,1)
 plot(t,Sfc,'LineWidth',2)
@@ -346,7 +349,7 @@ plot(t,f(t),'r','LineWidth',0.75)
 grid on
 hold on
 plot(t,Sfc,'b','LineWidth',1.5)
-legend('Función original','Serie de Fourier ','Location','Best')
+legend('Función original','Serie de Fourier ','Location','northeast')
 xlabel('t','FontWeight','bold','FontSize',16)
 axis auto
 
