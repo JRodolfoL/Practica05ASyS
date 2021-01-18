@@ -309,6 +309,10 @@ title('Espectro de fase \phi_n ','FontWeight','bold','FontSize',16) % %
 xlabel('\omega','FontWeight','bold','FontSize',16)
 grid on
 
+
+%% Ejercicio 3
+clf;
+
 T0=2*pi;
 W0=2*pi/T0;
 m=15;

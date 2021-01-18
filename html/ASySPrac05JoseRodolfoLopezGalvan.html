@@ -66,6 +66,7 @@ h2 a, h2 a:visited {
 <ul>
 <li><a href="#node1">Objetivos</a></li>
 <li><a href="#node2">Ejercicio PR10</a></li>
+<li><a href="#node3">Ejercicio 3</a></li>
 </ul>
 
 <ul>
@@ -223,7 +224,7 @@ T0=2;
 W0=pi;
 Dn=simplify((1/T0)*int(f*exp(-n*W0*j*t),-T0/2,T0/2))</pre>
 
-<pre class="oct-code-output">Waiting........
+<pre class="oct-code-output">Waiting.......
 warning: passing floating-point values to sym is dangerous, see "help sym"
 Dn = (sym)
  
@@ -473,7 +474,13 @@ subplot(3,2,5) <span class="comment">% %</span>
 stem(W0*nn,angle(absdnn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
 title(<span class="string">'Espectro de fase \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
 xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
-grid on
+grid on</pre>
+
+<pre class="oct-code-output">warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
+warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
+</pre>
+<h2><a id="node3">Ejercicio 3</a></h2>
+<pre class="oct-code">clf;
 
 T0=2*pi;
 W0=2*pi/T0;
@@ -552,8 +559,6 @@ xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</s
 grid on</pre>
 
 <pre class="oct-code-output">warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
-warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
-warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
 warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
 warning: division by zero
 </pre>
@@ -874,6 +879,10 @@ stem(W0*nn,angle(absdnn),'LineWidth',2) % %
 title('Espectro de fase \phi_n ','FontWeight','bold','FontSize',16) % %
 xlabel('\omega','FontWeight','bold','FontSize',16)
 grid on
+
+
+%% Ejercicio 3
+clf;
 
 T0=2*pi;
 W0=2*pi/T0;
