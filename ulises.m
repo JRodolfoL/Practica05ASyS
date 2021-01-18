@@ -6,7 +6,7 @@
 % _ *1.-* _ Encuentra la expresion de la serie de Fourier, para la señal f(t) = t, 
 % en el intervalo [−1, 1].Observa que es una señal impar.
 %%
-clear
+
 figure(1)
 hFig = figure(1);
 set(hFig, 'Position', [0 0 900 900])
@@ -26,9 +26,9 @@ plot(u,f(u))
 % Asi obteniendo los valores necesarios para la serie de fourier trigonometrica 
 % compacta:
 %%
-syms n t;
 
-assume n positive integer;
+syms t n 
+assume n positive integer
 
 T0=2;
 w0=2*pi/T0;
@@ -47,8 +47,12 @@ fi0=pi;
 else
     fi0=0;
 end
+
+%%
 %como fin es algo entre 0, se reescribira para adecuarla
+
 fin=@(n) pi/2.*((-1).^n);
+
 %% 
 % a.- 
 % 
@@ -139,14 +143,15 @@ grid on
 %% 
 % b. Serie de Fourier Exponencial Compleja:
 %%
-clear
+
 
 syms t n 
-assume(n,{'positive','integer'})
+assume n positive integer
 T0=2;
 W0=2*pi/T0;
 f=t;
 Dn=simplify((1/T0)*int(f*exp(-n*j*W0*t),-T0/2,T0/2))
+
 %% 
 % Las Serie de Fourier queda de la siguiente forma:
 % 
@@ -154,6 +159,7 @@ Dn=simplify((1/T0)*int(f*exp(-n*j*W0*t),-T0/2,T0/2))
 % 
 % Realizamos la grafica
 %%
+
 m=15;
 Dn=@(n) j*(-1)^(n)/(n*pi);
 D0=0;
@@ -222,11 +228,12 @@ title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16)
 xlabel('\omega','FontWeight','bold','FontSize',16)
 grid on
 axis auto
+
 %% 
 % _ * 2.- * _ Encuentra la expresion de la serie de Fourier, para la señal f(t) = t^2  
 % en el intervalo [−2, 2]. Observa que es una señ̃al par.
 %%
-clear
+
 
 figure(4)
 hFig = figure(4);
@@ -359,7 +366,7 @@ grid on
 %% 
 % b. Serie de Fourier Exponencial Compleja:
 %%
-clear
+
 syms t n 
 assume(n,'integer')
 T0=4;
