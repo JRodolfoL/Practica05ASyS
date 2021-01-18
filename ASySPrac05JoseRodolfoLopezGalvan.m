@@ -6,12 +6,17 @@
 % * Gachuz Hernández Karla Denisse
 % * García Arteaga Alejandro
 % * López Galván José Rodolfo
-% Objetivos
-%% 
+%
+
+%% Objetivos
+%
 % * Realizar gráficas de series de Fourier exponenciales y trigonométricas en 
 % tiempo continuo
 % * Manipulación de instrucciones en MATLAB
-% Ejercicio del PR10
+%
+
+%% Ejercicio PR10
+%
 % Sea una señal $f\left(t\right)\;$de periodo $T$, su descripción en el intervalo 
 % $\left(-\frac{T}{2},\frac{T}{2}\right)$ es:
 % 
@@ -301,5 +306,81 @@ grid on
 subplot(3,2,5) % % 
 stem(W0*nn,angle(absdnn),'LineWidth',2) % % 
 title('Espectro de fase \phi_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+T0=2*pi;
+W0=2*pi/T0;
+m=15;
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+Dn=@(n) (sin((n*pi)/2)/(pi*n));
+D0=1/2;
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+Sfc=D0;
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+figure (1);
+hFig = figure(1);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,'LineWidth',2)
+grid on
+legend('S. Fourier Exp. Compleja','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-2.5*T0 2.5*T0 -0.5 1.5])
+
+Sfc=D0;
+t=(-T0/2):0.0001:(T0/2);
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',0.75)
+grid on
+hold on
+plot(t,Sfc,'b','LineWidth',1.5)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+for i =-m:m
+    if i==0
+        absdn(cont)=D0;
+    end
+    
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5) % % 
+stem(W0*nn,angle(absdn),'LineWidth',2) % % 
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16) % % 
 xlabel('\omega','FontWeight','bold','FontSize',16)
 grid on

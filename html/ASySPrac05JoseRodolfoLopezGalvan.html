@@ -62,24 +62,28 @@ h2 a, h2 a:visited {
 
 <p>Integrantes:</p>
 
+<h2>Contents</h2>
+<ul>
+<li><a href="#node1">Objetivos</a></li>
+<li><a href="#node2">Ejercicio PR10</a></li>
+</ul>
 
 <ul>
 <li>Arellano Paz Angel Ulises</li>
 <li>Cardoso Arias Javier</li>
 <li>Gachuz Hernández Karla Denisse</li>
 <li>García Arteaga Alejandro</li>
-<li>López Galván José Rodolfo
-Objetivos</li>
+<li>López Galván José Rodolfo</li>
 </ul>
-
+<h2><a id="node1">Objetivos</a></h2>
 <ul>
 <li>Realizar gráficas de series de Fourier exponenciales y trigonométricas en
 tiempo continuo</li>
-<li>Manipulación de instrucciones en MATLAB
-Ejercicio del PR10
-Sea una señal $f\left(t\right)\;$de periodo $T$, su descripción en el intervalo
-$\left(-\frac{T}{2},\frac{T}{2}\right)$ es:</li>
+<li>Manipulación de instrucciones en MATLAB</li>
 </ul>
+<h2><a id="node2">Ejercicio PR10</a></h2>
+<p>Sea una señal $f\left(t\right)\;$de periodo $T$, su descripción en el intervalo
+$\left(-\frac{T}{2},\frac{T}{2}\right)$ es:</p>
 
 <p>$$f\left(t\right)={\textrm{ae}}^{-a\left|t\right|}$$</p>
 
@@ -219,7 +223,7 @@ T0=2;
 W0=pi;
 Dn=simplify((1/T0)*int(f*exp(-n*W0*j*t),-T0/2,T0/2))</pre>
 
-<pre class="oct-code-output">Waiting......
+<pre class="oct-code-output">Waiting........
 warning: passing floating-point values to sym is dangerous, see "help sym"
 Dn = (sym)
  
@@ -378,7 +382,7 @@ grid on</pre>
 <pre class="oct-code-output">warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
 warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
 </pre>
-<img src="ASySPrac05JoseRodolfoLopezGalvan-1.png" alt="ASySPrac05JoseRodolfoLopezGalvan-1.png">
+
 <p><i>Trigonometrica compacta</i></p>
 
 <pre class="oct-code">T0=2;
@@ -469,12 +473,91 @@ subplot(3,2,5) <span class="comment">% %</span>
 stem(W0*nn,angle(absdnn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
 title(<span class="string">'Espectro de fase \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
 xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid on
+
+T0=2*pi;
+W0=2*pi/T0;
+m=15;
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+Dn=@(n) (sin((n*pi)/2)/(pi*n));
+D0=1/2;
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+Sfc=D0;
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+
+figure (1);
+hFig = figure(1);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,<span class="string">'LineWidth'</span>,2)
+grid on
+legend(<span class="string">'S. Fourier Exp. Compleja'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-2.5*T0 2.5*T0 -0.5 1.5])
+
+Sfc=D0;
+t=(-T0/2):0.0001:(T0/2);
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,0.75)
+grid on
+hold on
+plot(t,Sfc,<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,1.5)
+legend(<span class="string">'Función original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis auto
+
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis auto
+grid on
+
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =-m:m
+    <span class="keyword">if</span> i==0
+        absdn(cont)=D0;
+    <span class="keyword">end</span>
+
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid on
+
+subplot(3,2,5) <span class="comment">% %</span>
+stem(W0*nn,angle(absdn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
 grid on</pre>
 
 <pre class="oct-code-output">warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
 warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
+warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
+warning: legend: 'best' not yet implemented for location specifier, using 'northeast' instead
+warning: division by zero
 </pre>
-<img src="ASySPrac05JoseRodolfoLopezGalvan-2.png" alt="ASySPrac05JoseRodolfoLopezGalvan-2.png">
+
 <footer>
 <hr>
 <a href="https://www.octave.org">Published with GNU Octave 5.2.0</a>
@@ -489,12 +572,17 @@ warning: legend: 'best' not yet implemented for location specifier, using 'north
 % * Gachuz Hernández Karla Denisse
 % * García Arteaga Alejandro
 % * López Galván José Rodolfo
-% Objetivos
-%%
+%
+
+%% Objetivos
+%
 % * Realizar gráficas de series de Fourier exponenciales y trigonométricas en
 % tiempo continuo
 % * Manipulación de instrucciones en MATLAB
-% Ejercicio del PR10
+%
+
+%% Ejercicio PR10
+%
 % Sea una señal $f\left(t\right)\;$de periodo $T$, su descripción en el intervalo
 % $\left(-\frac{T}{2},\frac{T}{2}\right)$ es:
 %
@@ -784,6 +872,82 @@ grid on
 subplot(3,2,5) % %
 stem(W0*nn,angle(absdnn),'LineWidth',2) % %
 title('Espectro de fase \phi_n ','FontWeight','bold','FontSize',16) % %
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+T0=2*pi;
+W0=2*pi/T0;
+m=15;
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+Dn=@(n) (sin((n*pi)/2)/(pi*n));
+D0=1/2;
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+Sfc=D0;
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+figure (1);
+hFig = figure(1);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,'LineWidth',2)
+grid on
+legend('S. Fourier Exp. Compleja','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-2.5*T0 2.5*T0 -0.5 1.5])
+
+Sfc=D0;
+t=(-T0/2):0.0001:(T0/2);
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',0.75)
+grid on
+hold on
+plot(t,Sfc,'b','LineWidth',1.5)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+for i =-m:m
+    if i==0
+        absdn(cont)=D0;
+    end
+
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5) % %
+stem(W0*nn,angle(absdn),'LineWidth',2) % %
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16) % %
 xlabel('\omega','FontWeight','bold','FontSize',16)
 grid on
 ##### SOURCE END #####
