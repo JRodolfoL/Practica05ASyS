@@ -1,0 +1,1922 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-01-18"><meta name="DC.source" content="PRACTICA5CASITERMINADA.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</h1><!--introduction--><p>Integrantes:</p><div><ul><li>Arellano Paz Angel Ulises</li><li>Cardoso Arias Javier</li><li>Gachuz Hern&aacute;ndez Karla Denisse</li><li>Garc&iacute;a Arteaga Alejandro</li><li>L&oacute;pez Galv&aacute;n Jos&eacute; Rodolfo</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Ejercicio 1</a></li><li><a href="#3">Ejemplo 6.2 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. Utilizar A =1.</a></li><li><a href="#5">Serie de Fourier Trigonometrica compacta</a></li><li><a href="#6">Ejercicio 2</a></li><li><a href="#7">PR08</a></li><li><a href="#19">Ejercicio del PR10</a></li></ul></div><h2 id="1">Objetivos</h2><div><ul><li>Realizar gr&aacute;ficas de series de Fourier exponenciales y trigonom&eacute;tricas en tiempo continuo</li><li>Manipulaci&oacute;n de instrucciones en MATLAB</li></ul></div><h2 id="2">Ejercicio 1</h2><h2 id="3">Ejemplo 6.2 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. Utilizar A =1.</h2><p>EXAMPLE 6.2 Compact Trigonometric Fourier Series of a Periodic TriangleWave Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in Fig. 6.4a, and sketch the amplitude and phase spectra for x(t).</p><p>Serie de Fourier compleja</p><pre class="codeinput">clear
+sympref(<span class="string">'HeavisideAtOrigin'</span>,1);
+u=@(t) heaviside(t);
+d0=0;
+dn=@(n) (2*j*(2*sin((n*pi)/2) - n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2 - 1))/(n^2*pi^2);
+t0=-0.5;
+tf=1.5;
+f=@(t) (2*t.*(u(t+0.5)-u(t-0.5)))-(2*(1-t).*(-u(t-0.5)+u(t-1.5)));
+armo=15;
+a=-2;
+b=2;
+sfc(t0,tf,dn,d0,f,armo,a,b)
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_01.png" alt=""> <h2 id="5">Serie de Fourier Trigonometrica compacta</h2><pre class="language-matlab">Cn=2*abs(simplify((dn)));
+</pre><pre class="language-matlab">Cn=simplify(Cn);
+</pre><pre class="language-matlab">Phi_n=angle(dn);
+</pre><pre class="language-matlab">C0=0;
+</pre><pre class="language-matlab">Phi_0=angle(subs(Dn,n,0))
+</pre><pre class="codeinput">cn=@(n) (8*abs(((2*sin((n*pi)/2)-n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2-1))))/(n^2*pi^2);
+c0=0;
+phin=pi;
+phi0=0;
+sftc(t0,tf,dn,d0,f,armo,cn,c0,phin,phi0)
+</pre><pre class="codeoutput">Warning: Ignoring extra legend entries. 
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_02.png" alt=""> <h2 id="6">Ejercicio 2</h2><p>Ejemplo 6.4 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. EXAMPLE 6.4 Find the compact trigonometric Fourier series for the square-pulse periodic signal</p><pre class="codeinput">T0=2*pi;
+W0=2*pi/T0;
+m=15;
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+Dn=@(n) (sin((n*pi)/2)/(pi*n));
+D0=1/2;
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+Sfc=D0;
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+
+figure (3);
+hFig = figure(3);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'S. Fourier Exp. Compleja'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-2.5*T0 2.5*T0 -0.5 1.5])
+
+Sfc=D0;
+t=(-T0/2):0.0001:(T0/2);
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,0.75)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,Sfc,<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,1.5)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =-m:m
+    <span class="keyword">if</span> i==0
+        absdn(cont)=D0;
+    <span class="keyword">end</span>
+
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+
+subplot(3,2,5) <span class="comment">% %</span>
+stem(W0*nn,angle(absdn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+
+
+
+
+
+<span class="comment">% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %</span>
+<span class="comment">% Con lo que la Serie de Fourier exponencial compleja queda de la siguiente forma</span>
+<span class="comment">%</span>
+<span class="comment">% $$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } D_n e^{\textrm{jn}\pi t}</span>
+<span class="comment">% =\sum_{n=-\infty }^{\infty } \frac{\sin{\frac{\pi n}{2}}}{\pi n} e^{\textrm{jn}\pi t}+\frac{1}{2}$$</span>
+<span class="comment">%</span>
+<span class="comment">% Para obtener la Trigonometrica Compacta.</span>
+
+<span class="comment">% Utilizando los $C_n ,{\;\phi }_{n\;} ,\;\phi_0$ y $C_0$ se calcula</span>
+<span class="comment">% la serie de Fourier en su forma Trigonometrica Compacta:</span>
+
+<span class="comment">% $$S_f \left(t\right)= C_0\cos{\;\phi_0}+\sum_{n=1}^{\infty }C_n\cos{(nW_0t+{\;\phi}_{n\;})}</span>
+<span class="comment">% =\frac{1}{2}+\frac{2}{3\pi}\cos{(3t-\pi)}+\frac{2}{7\pi}\cos{(7t-\pi)}+...$$</span>
+
+
+<span class="comment">% _Trigonometrica compacta_</span>
+syms <span class="string">n</span> <span class="string">t</span> <span class="string">m</span>
+
+assume(n,[<span class="string">"positive"</span> <span class="string">"integer"</span>])
+
+T0=2*pi;
+W0=2*pi/T0;
+m=15;
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+Cn=@(n) 2*abs((sin((n*pi)/2)/(pi*n)));
+C0=abs(D0);
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+phi0=0;
+phin=@(n) pi*(mod(n,3)==0) + pi*(mod(n,4)==0) + pi*(n==7)+ pi*(n==11) - pi*(n==9) - pi*(n==6)- pi*(n==12);
+Sft=C0*cos(phi0);
+
+t=(-T0/2):0.0001:(T0/2);
+<span class="keyword">for</span> n=1:m
+  Sft=Sft+Cn(n)*cos((n*W0*t) + phin(n));
+<span class="keyword">end</span>
+figure (4);
+hFigg = figure(2);
+set(hFigg, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sft,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'S. Fourier Trigo. Compacta'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-T0/2 T0/2 -0.5 1.5])
+Sft=abs(C0);
+t=(-T0/2):0.0001:(T0/2);
+
+<span class="keyword">for</span> n=1:m
+  Sft=Sft+Cn(n)*cos((n*W0*t) + phin(n));
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,0.75)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,Sft,<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,1.5)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+
+subplot(3,2,4)
+Et=f(t)-Sft;
+plot(t,Et,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+subplot(3,2,6)
+area(t,Et.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+nn=0:m;
+abscn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =0:m
+    <span class="keyword">if</span> i==0
+        abscn(cont)=C0;
+    <span class="keyword">end</span>
+
+    abscn(cont)=Cn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+nn=0:m;
+absdnn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =0:m
+    <span class="keyword">if</span> i==0
+        absdnn(cont)=D0;
+    <span class="keyword">end</span>
+
+    absdnn(cont)=Dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+
+subplot(3,2,3)
+stem(W0*nn,abs(abscn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud C_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+
+subplot(3,2,5) <span class="comment">% %</span>
+stem(W0*nn,angle(absdnn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
+title(<span class="string">'Espectro de fase \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_03.png" alt=""> <img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_04.png" alt=""> <img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_05.png" alt=""> <h2 id="7">PR08</h2><p>Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos (hay dos series en esta tarea).</p><p>_ <b>1.-</b> _ Encuentra la expresion de la serie de Fourier, para la se&ntilde;al f(t) = t, en el intervalo [&#8722;1, 1].Observa que es una se&ntilde;al impar.</p><pre class="codeinput">figure(5)
+hFig = figure(5);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+f=@(u) u;
+u=-1:0.01:1;
+plot(u,f(u))
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_06.png" alt=""> <p>Con:</p><p><img src="PRACTICA5CASITERMINADA_eq10222065192639570675.png" alt="$$T_0 =2,\;\;\;\;\;\;\;W_0 =\pi$$" style="width:124px;height:14px;"></p><p>Siendo la serier de fourier compacta:</p><p><img src="PRACTICA5CASITERMINADA_eq08022497163505398808.png" alt="$$S_f \left(t\right)=C_0 \;\mathrm{cos}\left(\phi_0 \right)+\sum_{n=1}^{\infty&#xA;} \left(C_n \;\mathrm{cos}\left(n\varpi_0 t\;+\phi_n \right)\right)$$" style="width:299px;height:41px;"></p><p>Asi obteniendo los valores necesarios para la serie de fourier trigonometrica compacta:</p><pre class="codeinput">syms <span class="string">n</span> <span class="string">t</span> <span class="string">m</span>
+
+assume(n,[<span class="string">"positive"</span> <span class="string">"integer"</span>]);
+
+T0=2;
+w0=2*pi/T0;
+
+a0=(1/T0)*int(t,t,-1,1);
+an=simplify((2/T0)*int(t*cos(n*w0*t),t,-1,1));
+bn=simplify((4/T0)*int(t*sin(n*w0*t),t,0,1));
+
+c0=abs(a0)
+Cn=sqrt(simplify(an^2+bn^2))
+cn=@(n) 2./(pi.*n);
+<span class="keyword">if</span>(a0&lt;0)
+
+fi0=pi;
+
+<span class="keyword">else</span>
+    fi0=0;
+<span class="keyword">end</span>
+<span class="comment">%como fin es algo entre 0, se reescribira para adecuarla</span>
+fin=@(n) pi/2.*((-1).^n);
+</pre><pre class="codeoutput"> 
+c0 =
+ 
+0
+ 
+ 
+Cn =
+ 
+2/(n*pi)
+ 
+</pre><p>a.-</p><p>Realizamos la grafica</p><p><img src="PRACTICA5CASITERMINADA_eq05073431481875225184.png" alt="$$\begin{array}{l}S_f \left(t\right)=C_0 \;\mathrm{cos}\left(\phi_0 \right)+\sum_{n=1}^{\infty&#xA;} \left(C_n \;\mathrm{cos}\left(n\varpi_0 t\;+\phi_n \right)\right)\\=\sum_{n=1}^{\infty&#xA;} \left(\frac{2}{n\pi }\;\mathrm{cos}\left(n\pi t+\phi_n \right)\right)\end{array}$$" style="width:314px;height:35px;"></p><pre class="codeinput">t0=-1;
+tf=1;
+armo=15;
+a=-7;
+b=7;
+
+sf=c0*cos(fi0);
+t=a:0.01:b;
+
+<span class="keyword">for</span> m=1:armo
+    theta=w0*m*t + fin(m);
+    sf=sf + cn(m)*cos(theta);
+<span class="keyword">end</span>
+figure(6)
+hFig = figure(6);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,sf,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'Serie de Fourier'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+
+sf=c0*cos(fi0);
+t1=t0:0.01:tf;
+
+<span class="keyword">for</span> m=1:armo
+    theta=w0*m*t1 + fin(m);
+    sf=sf + cn(m)*cos(theta);
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+plot(t1,f(t1),<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t1,sf,<span class="string">'LineWidth'</span>,2)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+nn=0:armo;
+axis <span class="string">auto</span>
+
+subplot(3,2,4)
+e=f(t1)-sf;
+plot(t1,e,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+subplot(3,2,6)
+e=f(t1)-sf;
+area(t1,e.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+cnM=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =-armo:armo
+    <span class="keyword">if</span> i==0
+        cnM(cont)=c0;
+    <span class="keyword">end</span>
+    cnM(cont)=cn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(w0*nn,cn(nn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud Cn'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+
+subplot(3,2,5)
+stem(w0*nn,fin(nn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de fase, \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_07.png" alt=""> <p>b. Serie de Fourier Exponencial Compleja:</p><pre class="codeinput">clear
+
+syms <span class="string">n</span> <span class="string">t</span> <span class="string">m</span>
+
+assume(n,{<span class="string">'positive'</span>,<span class="string">'integer'</span>})
+T0=2;
+W0=2*pi/T0;
+f=t;
+Dn=simplify((1/T0)*int(f*exp(-n*j*W0*t),-T0/2,T0/2))
+</pre><pre class="codeoutput"> 
+Dn =
+ 
+(-1)^(n + 1/2)/(n*pi)
+ 
+</pre><p>Las Serie de Fourier queda de la siguiente forma:</p><p>Realizamos la grafica</p><pre class="codeinput">m=15;
+Dn=@(n) j*(-1)^(n)/(n*pi);
+D0=0;
+t=(5)*(-T0/2):0.01:(5)*(T0/2);
+Sfc=D0;
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+figure(7)
+hFig = figure(7);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+
+subplot(3,2,1)
+plot(t,Sfc,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'S. Fourier Exp. Compleja'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-6 6 -2 2])
+Sfc=D0;
+t=(-T0/2):0.01:(T0/2);
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+subplot(3,2,2)
+f=@(t) t;
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,1)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,Sfc,<span class="string">'g'</span>,<span class="string">'LineWidth'</span>,0.85)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-1.2 1.2 -1.2 1.2])
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+subplot(3,2,6)
+area(t,Ec.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =-m:m
+    <span class="keyword">if</span> i==0
+        absdn(cont)=D0;
+    <span class="keyword">end</span>
+
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+axis <span class="string">auto</span>
+subplot(3,2,5)
+stem(W0*nn,angle(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+axis <span class="string">auto</span>
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_08.png" alt=""> <p>_ * 2.- * _ Encuentra la expresion de la serie de Fourier, para la se&ntilde;al f(t) = t^2 en el intervalo [&#8722;2, 2]. Observa que es una se&ntilde;&#771;al par.</p><pre class="codeinput">clear
+
+figure(8)
+hFig = figure(8);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+f=@(u) u.^2;
+u=-2:0.01:2;
+plot(u,f(u))
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_09.png" alt=""> <p>Realizando lo mismo que el anterior</p><p>a.-Serie de Fourier Trigonometrica Compacta</p><pre class="codeinput">syms <span class="string">n</span> <span class="string">t</span> <span class="string">m</span>
+
+assume(n,[<span class="string">"positive"</span> <span class="string">"integer"</span>])
+
+T0=4;
+w0=2*pi/T0;
+
+a0=(1/T0)*int(t^2,t,-2,2);
+an=simplify((2/T0)*int(t^2*cos(n*w0*t),t,-2,2));
+bn=simplify((4/T0)*int(t^2*sin(n*w0*t),t,-2,2));
+
+c0=abs(a0)
+Cn=sqrt(simplify(an^2+bn^2))
+cn=@(n) 16./((n.*pi).^2);
+fin=-atan(bn/an);
+
+<span class="keyword">if</span>(a0&lt;0)
+
+fi0=pi
+<span class="keyword">else</span>
+    fi0=0;
+<span class="keyword">end</span>
+<span class="comment">%como fin es o entre algo, se reescribira para adecuarla</span>
+fin=@(n) pi.*((mod(n,1)==0)) -pi.*((mod(n,2)==0));
+</pre><pre class="codeoutput"> 
+c0 =
+ 
+4/3
+ 
+ 
+Cn =
+ 
+16/(n^2*pi^2)
+ 
+</pre><p>Las Serie de Fourier queda de la siguiente forma:</p><p><img src="PRACTICA5CASITERMINADA_eq18396426650453124848.png" alt="$$\begin{array}{l}S_f \left(t\right)=C_0 \;\mathrm{cos}\left(\phi_0 \right)+\sum_{n=1}^{\infty&#xA;} \left(C_n \;\mathrm{cos}\left(n\varpi_0 t\;+\phi_n \right)\right)\\=\frac{4}{3}+\sum_{n=1}^{\infty&#xA;} \left(\frac{16{\left(-1\right)}^n }{n^2 \pi^2 }\;\mathrm{cos}\left(\frac{n\pi&#xA;t\;}{2}+\phi_n \right)\right)\end{array}$$" style="width:314px;height:44px;"></p><p>Realizamos la grafica</p><pre class="codeinput">t0=-2;
+tf=2;
+armo=15;
+a=-10;
+b=10;
+
+sf=c0*cos(fi0);
+t=a:0.01:b;
+
+<span class="keyword">for</span> m=1:armo
+    theta=w0*m*t + fin(m);
+    sf=sf + cn(m)*cos(theta);
+<span class="keyword">end</span>
+figure(9)
+hFig = figure(9);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,sf,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'Serie de Fourier'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+
+sf=c0*cos(fi0);
+t1=t0:0.01:tf;
+i=1;
+<span class="keyword">for</span> m=1:armo
+    theta=w0*m*t1 + fin(m);
+    sf=sf + cn(m)*cos(theta);
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+plot(t1,f(t1),<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t1,sf,<span class="string">'LineWidth'</span>,2)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+nn=0:armo;
+axis <span class="string">auto</span>
+
+subplot(3,2,4)
+e=f(t1)-sf;
+plot(t1,e,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+subplot(3,2,6)
+e=f(t1)-sf;
+area(t1,e.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+cnM=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =-armo:armo
+    <span class="keyword">if</span> i==0
+        cnM(cont)=c0;
+    <span class="keyword">end</span>
+    cnM(cont)=cn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(w0*nn,cn(nn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud Cn'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+
+subplot(3,2,5)
+stem(w0*nn,fin(nn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de fase, \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_10.png" alt=""> <p>b. Serie de Fourier Exponencial Compleja:</p><pre class="codeinput">clear
+syms <span class="string">n</span> <span class="string">t</span> <span class="string">m</span>
+assume(n,<span class="string">'integer'</span>)
+T0=4;
+W0=2*pi/T0;
+f2=t*t;
+Dn=simplify((1/T0)*int(f2*exp(-n*j*W0*t),-T0/2,T0/2))
+D0=simplify((1/T0)*int(f2,-T0/2,T0/2))
+</pre><pre class="codeoutput"> 
+Dn =
+ 
+(8*(-1)^n)/(n^2*pi^2)
+ 
+ 
+D0 =
+ 
+4/3
+ 
+</pre><p>Las Serie de Fourier queda de la siguiente forma:</p><p><img src="PRACTICA5CASITERMINADA_eq07176850497108589965.png" alt="$$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } D_n e^{\mathrm{nj}\omega_0&#xA;t} =\frac{4}{3}+\sum_{n=-\infty }^{-1} \frac{8{\left(-1\right)}^n }{n^2 \pi^2&#xA;}e^{\frac{\pi }{2}\mathrm{njt}} +\sum_1^{\infty } \frac{8{\left(-1\right)}^n&#xA;}{n^2 \pi^2 }e^{\frac{\pi }{2}\mathrm{njt}}$$" style="width:415px;height:43px;"></p><p>Realizamos la grafica</p><pre class="codeinput">m=15;
+Dn=@(n) (8*(-1)^n)/((n*pi)^2);
+D0=4/3;
+t=(5)*(-T0/2):0.01:(5)*(T0/2);
+Sfc=D0;
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+figure(10)
+hFig = figure(10);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'S. Fourier'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-10 10 -0.5 4.5])
+
+Sfc=D0;
+t=(-T0/2):0.01:(T0/2);
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+f2=@(t) t.*t;
+plot(t,f2(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,1)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,Sfc,<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,0.85)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-2 2 -0.5 4.5])
+subplot(3,2,4)
+Ec=f2(t)-Sfc;
+plot(t,Ec,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =-m:m
+    <span class="keyword">if</span> i==0
+        absdn(cont)=D0;
+    <span class="keyword">end</span>
+
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+axis <span class="string">auto</span>
+subplot(3,2,5)
+stem(W0*nn,angle(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+axis <span class="string">auto</span>
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_11.png" alt=""> <h2 id="19">Ejercicio del PR10</h2><p>Sea una se&ntilde;al <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;"> de periodo <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;">, su descripci&oacute;n en el intervalo <img src="PRACTICA5CASITERMINADA_eq13626939804765662702.png" alt="$\left(-\frac{T}{2},\frac{T}{2}\right)$" style="width:50px;height:18px;"> es:</p><p><img src="PRACTICA5CASITERMINADA_eq16205871781469351108.png" alt="$$f\left(t\right)={\textrm{ae}}^{-a\left|t\right|}$$" style="width:82px;height:18px;"></p><p>Su Serie de Fourier en dicho intervalo es:</p><p><img src="PRACTICA5CASITERMINADA_eq02516644016229542297.png" alt="$$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a}&#xA;\cos \left(\pi n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t}$$" style="width:249px;height:41px;"></p><p><b>a)</b> Determine el valor de <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;"></p><p><b>b</b>) &iquest;C&uacute;al es el valor promedio de <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;">? (realice dos procedimientos). El valor promedio de una se&#771;nal peri&oacute;dica se define como:</p><p><img src="PRACTICA5CASITERMINADA_eq07239622747548459175.png" alt="$$V_p \left(f\right)=\frac{1}{T}\int_{<\textrm{To}&gt;} f\left(t\right)\textrm{dt}$$" style="width:160px;height:34px;"></p><p><b>c)</b> La componente de$f\left(t\right)$ en cierta frecuencia se puede ecpresar como <img src="PRACTICA5CASITERMINADA_eq09227379482330864126.png" alt="$\textrm{Acos}\left(3\pi t\right)$" style="width:65px;height:15px;">. Determine el valor de <img src="PRACTICA5CASITERMINADA_eq05147331747641807187.png" alt="$A$" style="width:10px;height:11px;">.</p><p><b>d)</b> Calcule la Serie de Fourier para la se&ntilde;al <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;"> con el dato encontrado en <b>a)</b> y verifique que coincida con la proporcionada</p><p>Soluci&oacute;n:</p><p>Ya que <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;"> es el perido de $f\left(t\right)$haremos la igualdad <img src="PRACTICA5CASITERMINADA_eq06315040559885451834.png" alt="$T=\textrm{T0}$" style="width:48px;height:11px;"> esto con la finalidad de poder respetar la nomenclatura de la Serie de Fourier</p><p><b>a)</b></p><p>De la $S_f \left(t\right)\;$que nos fue proporcionada podemos notar que <img src="PRACTICA5CASITERMINADA_eq12106556665514577580.png" alt="$\omega_0 =\pi$" style="width:43px;height:10px;"> ya que:</p><p><img src="PRACTICA5CASITERMINADA_eq16874137546865367517.png" alt="$$S_f \left(t\right)=D_0 +\sum_{n=-\infty }^{\infty } D_n e^{{\textrm{jn}\omega&#xA;}_0 t} =\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a} \cos \left(\pi&#xA;n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t} \;\;$$" style="width:394px;height:41px;"></p><p>Analizando las exponenciales</p><p><img src="PRACTICA5CASITERMINADA_eq12445456109505927490.png" alt="$${e^{\textrm{jn}\omega_0 t} \;=e}^{\textrm{jn}\pi t} \;\Longrightarrow \omega_0&#xA;=\pi \;$$" style="width:167px;height:25px;"></p><pre class="codeinput">W0=pi;
+T0=2*pi/W0;
+T0
+</pre><pre class="codeoutput">
+T0 =
+
+     2
+
+</pre><p><b>b)</b> Declaramos las variables simbolicas a utilizar y escribimos la integral</p><pre class="codeinput">syms <span class="string">a</span> <span class="string">t</span> <span class="string">T0</span>
+f=a*exp(-a*abs(t))
+Vp=simplify(((1/T0)*int(f,-T0/2,T0/2)))
+</pre><pre class="codeoutput"> 
+f =
+ 
+a*exp(-a*abs(t))
+ 
+ 
+Vp =
+ 
+-(2*exp(-(T0*a)/2) - 2)/T0
+ 
+</pre><p>Intentamos simplificar pero el software no da para m&aacute;s</p><p>Si ocupamos $T=2\;$que fue obtenido en el inciso anterior, el valor promedio de <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;"> es:</p><pre class="codeinput">Vp=subs(Vp,T0,2)
+</pre><pre class="codeoutput"> 
+Vp =
+ 
+1 - exp(-a)
+ 
+</pre><p><b>c)</b> Notemos que <img src="PRACTICA5CASITERMINADA_eq09227379482330864126.png" alt="$\textrm{Acos}\left(3\pi t\right)$" style="width:65px;height:15px;"> tiene la forma <img src="PRACTICA5CASITERMINADA_eq03956828383089395562.png" alt="$\textrm{Acos}\left(n\pi t\right)$" style="width:66px;height:15px;"> con <img src="PRACTICA5CASITERMINADA_eq00013378311338420650.png" alt="$n=3$" style="width:35px;height:10px;">, dicha forma cumple con la forma Trigonometrica Compacta, por ende <img src="PRACTICA5CASITERMINADA_eq09227379482330864126.png" alt="$\textrm{Acos}\left(3\pi t\right)$" style="width:65px;height:15px;"></p><p>seria el tercer armonico y <img src="PRACTICA5CASITERMINADA_eq05147331747641807187.png" alt="$A$" style="width:10px;height:11px;"> seria el tercer coeficiente, al cual llamaremos <img src="PRACTICA5CASITERMINADA_eq04651218149415361745.png" alt="$C_3$" style="width:15px;height:14px;"></p><pre class="codeinput">syms <span class="string">a</span> <span class="string">n</span>
+assume(n,<span class="string">'real'</span>)
+assume(a,<span class="string">'real'</span>)
+Dn=(((a^2)*(1-exp(-a)*cos(pi*n)))/((a^2)+(pi*n)^2));
+C3=2*abs(subs(Dn,n,3))
+</pre><pre class="codeoutput"> 
+C3 =
+ 
+(2*a^2*(exp(-a) + 1))/(a^2 + 9*pi^2)
+ 
+</pre><p>Si buscamos obtener <img src="PRACTICA5CASITERMINADA_eq10018268557210568222.png" alt="$\phi_n \;$" style="width:14px;height:14px;"> usamos <img src="PRACTICA5CASITERMINADA_eq04465458950868345558.png" alt="$\phi_n =\angle \left(D_n \right)$" style="width:74px;height:15px;"></p><pre class="codeinput">phi3=angle(subs(Dn,n,3))
+</pre><pre class="codeoutput"> 
+phi3 =
+ 
+0
+ 
+</pre><p><b>d)</b> Usaremos <img src="PRACTICA5CASITERMINADA_eq17622669643979568772.png" alt="$\textrm{T0}=2$" style="width:44px;height:11px;">.</p><pre class="codeinput">syms <span class="string">n</span> <span class="string">t</span> <span class="string">a</span>
+assume(n,{<span class="string">'integer'</span>})
+assume(a,<span class="string">'real'</span>)
+T0=2;
+W0=pi;
+Dn=simplify((1/T0)*int(f*exp(-n*W0*j*t),-T0/2,T0/2))
+</pre><pre class="codeoutput"> 
+Dn =
+ 
+(a^2*exp(-a)*(exp(a) - (-1)^n))/(a^2 + n^2*pi^2)
+ 
+</pre><p>La expresi&oacute;n obtenida para los  <img src="PRACTICA5CASITERMINADA_eq10922897471658752443.png" alt="$D_n$" style="width:18px;height:13px;"> es una expresi&oacute;n equivalente a la proporcionada</p><p>Para poder graficar haremos <img src="PRACTICA5CASITERMINADA_eq13176458287187595405.png" alt="$a=2$" style="width:34px;height:10px;"></p><pre class="codeinput">Dn=subs(Dn,a,2)
+</pre><pre class="codeoutput"> 
+Dn =
+ 
+(4*exp(-2)*(exp(2) - (-1)^n))/(n^2*pi^2 + 4)
+ 
+</pre><p>Con lo que la Serie de Fourier exponenial compleja queda de la siguiente forma</p><p><img src="PRACTICA5CASITERMINADA_eq14528645211679404152.png" alt="$$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } D_n e^{\textrm{jn}\pi t}&#xA;=\sum_{n=-\infty }^{\infty } \frac{4e^{-2} \left(e^2 -{\left(-1\right)}^n \right)}{4+\pi^2&#xA;n^2 }e^{\textrm{jn}\pi t}$$" style="width:337px;height:41px;"></p><p>Para obtener la Trigonometrica Compacta.</p><pre class="codeinput">Cn=2*abs(simplify((Dn)));
+Cn=simplify(Cn)
+Phi_n=angle(Dn)
+C0=abs(subs(Dn,n,0))
+Phi_0=angle(subs(Dn,n,0))
+</pre><pre class="codeoutput"> 
+Cn =
+ 
+(8*abs((-1)^n - exp(2))*exp(-2))/(n^2*pi^2 + 4)
+ 
+ 
+Phi_n =
+ 
+piecewise((exp(2) - (-1)^n)/(n^2*pi^2 + 4) &lt; 0, pi, 0 &lt;= (exp(2) - (-1)^n)/(n^2*pi^2 + 4), 0)
+ 
+ 
+C0 =
+ 
+exp(-2)*(exp(2) - 1)
+ 
+ 
+Phi_0 =
+ 
+0
+ 
+</pre><p>Utilizando los <img src="PRACTICA5CASITERMINADA_eq14867364445199124387.png" alt="$C_n ,{\;\phi }_{n\;} ,\;\phi_0$" style="width:70px;height:14px;"> y <img src="PRACTICA5CASITERMINADA_eq07231672054177341587.png" alt="$C_0$" style="width:15px;height:14px;"> calculados ya podemos expresar la serie de Fourier en su forma Trigonometrica Compacta</p><p><img src="PRACTICA5CASITERMINADA_eq14712824767234428147.png" alt="$$S_f \left(t\right)=C_0 \cos \left(\phi_0 \right)+\sum_{n=1}^{\infty } C_n&#xA;\cos \left(n\omega_0 t+\phi_n \right)=e^{-2} \left(e^2 -1\right)+\sum_{n=1}^{\infty&#xA;} \frac{{8e}^{-2} \left(e^{-2} -{\left(-1\right)}^n \right)}{4+\pi^2 n^2 }\cos&#xA;\left(n\pi t\right)$$" style="width:594px;height:42px;"></p><p>Existe algo llamado Error que se define de la siguiente manera</p><p><img src="PRACTICA5CASITERMINADA_eq04541320111288201928.png" alt="$$E=f\left(t\right)-S_f \left(t\right)$$" style="width:110px;height:16px;"></p><p>El cual tambien sera graficado</p><p><i>Exponencial Compleja</i></p><pre class="codeinput">T0=2;
+W0=2*pi/T0;
+a=2;
+m=15;
+f=@(t) a*exp(-a*abs(t));
+Dn=@(n) ((4*exp(-2)*(exp(2)-(-1)^n))/(4+(n*pi)^2));
+D0=exp(-2)*(exp(2)-1);
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+Sfc=D0;
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+
+figure (11);
+hFig = figure(11);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'S. Fourier Exp. Compleja'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-5 5 -0.5 2.5])
+
+Sfc=D0;
+t=(-T0/2):0.0001:(T0/2);
+<span class="keyword">for</span> n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,0.75)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,Sfc,<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,1.5)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =-m:m
+    <span class="keyword">if</span> i==0
+        absdn(cont)=D0;
+    <span class="keyword">end</span>
+
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+
+subplot(3,2,5) <span class="comment">% %</span>
+stem(W0*nn,angle(absdn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_12.png" alt=""> <p><i>Trigonometrica compacta</i></p><pre class="codeinput">T0=2;
+W0=2*pi/T0;
+a=2;
+m=15;
+f=@(t) a*exp(-a*abs(t));
+Cn=@(n) ((8*exp(-2)*(exp(2)-(-1)^n))/(4+(n*pi)^2));
+C0=exp(-2)*(exp(2)-1);
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+phin=0;
+phi0=0;
+Sft=C0*cos(phi0);
+<span class="keyword">for</span> n=1:m
+    Sft=Sft+Cn(n)*cos(n*pi*t+phin);
+<span class="keyword">end</span>
+figure (12);
+hFigg = figure(12);
+set(hFigg, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sft,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'S. Fourier Trigo. Compacta'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([-5 5 -0.5 2.5])
+
+Sft=D0;
+t=(-T0/2):0.0001:(T0/2);
+<span class="keyword">for</span> n=1:m
+    Sft=Sft+Cn(n)*cos(n*pi*t+phin);
+<span class="keyword">end</span>
+
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,0.75)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,Sft,<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,1.5)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+
+subplot(3,2,4)
+Et=f(t)-Sft;
+plot(t,Et,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+subplot(3,2,6)
+area(t,Et.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+
+nn=0:m;
+abscn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =0:m
+    <span class="keyword">if</span> i==0
+        abscn(cont)=C0;
+    <span class="keyword">end</span>
+
+    abscn(cont)=Cn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+nn=0:m;
+absdnn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =0:m
+    <span class="keyword">if</span> i==0
+        absdnn(cont)=D0;
+    <span class="keyword">end</span>
+
+    absdnn(cont)=Dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+
+subplot(3,2,3)
+stem(W0*nn,abs(abscn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud C_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+
+subplot(3,2,5) <span class="comment">% %</span>
+stem(W0*nn,angle(absdnn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
+title(<span class="string">'Espectro de fase \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_13.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 5: Series de Fourier en tiempo continuo.
+%
+% Integrantes:
+%
+% * Arellano Paz Angel Ulises
+% * Cardoso Arias Javier
+% * Gachuz Hernández Karla Denisse
+% * García Arteaga Alejandro
+% * López Galván José Rodolfo
+%
+%% Objetivos
+% * Realizar gráficas de series de Fourier exponenciales y trigonométricas en tiempo continuo
+% * Manipulación de instrucciones en MATLAB
+%% Ejercicio 1
+%% Ejemplo 6.2 Agregar la expresión análitica de la serie en ambos formatos. Utilizar A =1.
+% EXAMPLE 6.2 Compact Trigonometric Fourier Series of a Periodic
+% TriangleWave
+% Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in
+% Fig. 6.4a, and sketch the amplitude and phase spectra for x(t).
+%
+%% 
+% Serie de Fourier compleja
+clear
+sympref('HeavisideAtOrigin',1);
+u=@(t) heaviside(t);
+d0=0;
+dn=@(n) (2*j*(2*sin((n*pi)/2) - n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2 - 1))/(n^2*pi^2);
+t0=-0.5;
+tf=1.5;
+f=@(t) (2*t.*(u(t+0.5)-u(t-0.5)))-(2*(1-t).*(-u(t-0.5)+u(t-1.5))); 
+armo=15;
+a=-2;
+b=2;
+sfc(t0,tf,dn,d0,f,armo,a,b)
+%% Serie de Fourier Trigonometrica compacta
+%
+%   Cn=2*abs(simplify((dn)));
+%
+%   Cn=simplify(Cn);
+%
+%   Phi_n=angle(dn);
+%
+%   C0=0;
+%
+%   Phi_0=angle(subs(Dn,n,0))
+%
+cn=@(n) (8*abs(((2*sin((n*pi)/2)-n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2-1))))/(n^2*pi^2);
+c0=0;
+phin=pi;
+phi0=0;
+sftc(t0,tf,dn,d0,f,armo,cn,c0,phin,phi0)
+
+
+%% Ejercicio 2
+% Ejemplo 6.4 Agregar la expresión análitica de la serie en ambos formatos.
+% EXAMPLE 6.4 Find the compact trigonometric Fourier series for the square-pulse periodic signal
+
+T0=2*pi;
+W0=2*pi/T0;
+m=15;
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+Dn=@(n) (sin((n*pi)/2)/(pi*n));
+D0=1/2;
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+Sfc=D0;
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+figure (3);
+hFig = figure(3);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,'LineWidth',2)
+grid on
+legend('S. Fourier Exp. Compleja','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-2.5*T0 2.5*T0 -0.5 1.5])
+
+Sfc=D0;
+t=(-T0/2):0.0001:(T0/2);
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',0.75)
+grid on
+hold on
+plot(t,Sfc,'b','LineWidth',1.5)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+for i =-m:m
+    if i==0
+        absdn(cont)=D0;
+    end
+    
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5) % % 
+stem(W0*nn,angle(absdn),'LineWidth',2) % % 
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% Con lo que la Serie de Fourier exponencial compleja queda de la siguiente forma
+% 
+% $$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } D_n e^{\textrm{jn}\pi t} 
+% =\sum_{n=-\infty }^{\infty } \frac{\sin{\frac{\pi n}{2}}}{\pi n} e^{\textrm{jn}\pi t}+\frac{1}{2}$$  
+% 
+% Para obtener la Trigonometrica Compacta.
+
+% Utilizando los $C_n ,{\;\phi }_{n\;} ,\;\phi_0$ y $C_0$ se calcula 
+% la serie de Fourier en su forma Trigonometrica Compacta:
+
+% $$S_f \left(t\right)= C_0\cos{\;\phi_0}+\sum_{n=1}^{\infty }C_n\cos{(nW_0t+{\;\phi}_{n\;})}
+% =\frac{1}{2}+\frac{2}{3\pi}\cos{(3t-\pi)}+\frac{2}{7\pi}\cos{(7t-\pi)}+...$$
+
+
+% _Trigonometrica compacta_
+syms n t m
+
+assume(n,["positive" "integer"])
+
+T0=2*pi;
+W0=2*pi/T0;
+m=15;
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+Cn=@(n) 2*abs((sin((n*pi)/2)/(pi*n)));
+C0=abs(D0);
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+phi0=0;
+phin=@(n) pi*(mod(n,3)==0) + pi*(mod(n,4)==0) + pi*(n==7)+ pi*(n==11) - pi*(n==9) - pi*(n==6)- pi*(n==12);
+Sft=C0*cos(phi0);
+
+t=(-T0/2):0.0001:(T0/2);
+for n=1:m
+  Sft=Sft+Cn(n)*cos((n*W0*t) + phin(n));
+end
+figure (4);
+hFigg = figure(2);
+set(hFigg, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sft,'LineWidth',2)
+grid on
+legend('S. Fourier Trigo. Compacta','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-T0/2 T0/2 -0.5 1.5])
+Sft=abs(C0);
+t=(-T0/2):0.0001:(T0/2);
+
+for n=1:m
+  Sft=Sft+Cn(n)*cos((n*W0*t) + phin(n));
+end
+
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',0.75)
+grid on
+hold on
+plot(t,Sft,'b','LineWidth',1.5)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+
+subplot(3,2,4)
+Et=f(t)-Sft;
+plot(t,Et,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Et.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+nn=0:m;
+abscn=zeros(1,length(nn));
+cont=1;
+for i =0:m
+    if i==0
+        abscn(cont)=C0;
+    end
+    
+    abscn(cont)=Cn(i);
+    cont=cont+1;
+end
+nn=0:m;
+absdnn=zeros(1,length(nn));
+cont=1;
+for i =0:m
+    if i==0
+        absdnn(cont)=D0;
+    end
+    
+    absdnn(cont)=Dn(i);
+    cont=cont+1;
+end
+
+
+subplot(3,2,3)
+stem(W0*nn,abs(abscn),'LineWidth',2)
+title('Espectro de magnitud C_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5) % % 
+stem(W0*nn,angle(absdnn),'LineWidth',2) % % 
+title('Espectro de fase \phi_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+%% PR08
+% Agregar la expresión análitica de la serie en ambos formatos (hay dos series 
+% en esta tarea).
+% 
+% _ *1.-* _ Encuentra la expresion de la serie de Fourier, para la señal f(t) 
+% = t, en el intervalo [−1, 1].Observa que es una señal impar.
+
+
+figure(5)
+hFig = figure(5);
+set(hFig, 'Position', [0 0 900 900])
+f=@(u) u;
+u=-1:0.01:1;
+plot(u,f(u))
+%% 
+% Con:
+% 
+% $$T_0 =2,\;\;\;\;\;\;\;W_0 =\pi$$
+% 
+% Siendo la serier de fourier compacta:
+% 
+% $$S_f \left(t\right)=C_0 \;\mathrm{cos}\left(\phi_0 \right)+\sum_{n=1}^{\infty 
+% } \left(C_n \;\mathrm{cos}\left(n\varpi_0 t\;+\phi_n \right)\right)$$
+% 
+% Asi obteniendo los valores necesarios para la serie de fourier trigonometrica 
+% compacta:
+
+syms n t m
+
+assume(n,["positive" "integer"]);
+
+T0=2;
+w0=2*pi/T0;
+
+a0=(1/T0)*int(t,t,-1,1);
+an=simplify((2/T0)*int(t*cos(n*w0*t),t,-1,1));
+bn=simplify((4/T0)*int(t*sin(n*w0*t),t,0,1));
+
+c0=abs(a0)
+Cn=sqrt(simplify(an^2+bn^2))
+cn=@(n) 2./(pi.*n);
+if(a0<0)
+    
+fi0=pi; 
+
+else
+    fi0=0;
+end
+%como fin es algo entre 0, se reescribira para adecuarla
+fin=@(n) pi/2.*((-1).^n);
+%% 
+% a.- 
+% 
+% Realizamos la grafica
+% 
+% $$\begin{array}{l}S_f \left(t\right)=C_0 \;\mathrm{cos}\left(\phi_0 \right)+\sum_{n=1}^{\infty 
+% } \left(C_n \;\mathrm{cos}\left(n\varpi_0 t\;+\phi_n \right)\right)\\=\sum_{n=1}^{\infty 
+% } \left(\frac{2}{n\pi }\;\mathrm{cos}\left(n\pi t+\phi_n \right)\right)\end{array}$$
+
+t0=-1;
+tf=1;
+armo=15;
+a=-7;
+b=7;
+
+sf=c0*cos(fi0);
+t=a:0.01:b;
+
+for m=1:armo
+    theta=w0*m*t + fin(m);
+    sf=sf + cn(m)*cos(theta);
+end
+figure(6)
+hFig = figure(6);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,sf,'LineWidth',2)
+grid on
+legend('Serie de Fourier','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+
+sf=c0*cos(fi0);
+t1=t0:0.01:tf;
+
+for m=1:armo
+    theta=w0*m*t1 + fin(m);
+    sf=sf + cn(m)*cos(theta);
+end
+
+subplot(3,2,2)
+plot(t1,f(t1),'b','LineWidth',2)
+grid on
+hold on
+plot(t1,sf,'LineWidth',2)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+nn=0:armo;
+axis auto
+
+subplot(3,2,4)
+e=f(t1)-sf;
+plot(t1,e,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+e=f(t1)-sf;
+area(t1,e.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+cnM=zeros(1,length(nn));
+cont=1;
+for i =-armo:armo
+    if i==0
+        cnM(cont)=c0;
+    end
+    cnM(cont)=cn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(w0*nn,cn(nn),'LineWidth',2)
+title('Espectro de magnitud Cn','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5)
+stem(w0*nn,fin(nn),'LineWidth',2)
+title('Espectro de fase, \phi_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+%% 
+% b. Serie de Fourier Exponencial Compleja:
+
+clear
+
+syms n t m
+
+assume(n,{'positive','integer'})
+T0=2;
+W0=2*pi/T0;
+f=t;
+Dn=simplify((1/T0)*int(f*exp(-n*j*W0*t),-T0/2,T0/2))
+%% 
+% Las Serie de Fourier queda de la siguiente forma:
+% 
+% Realizamos la grafica
+
+m=15;
+Dn=@(n) j*(-1)^(n)/(n*pi);
+D0=0;
+t=(5)*(-T0/2):0.01:(5)*(T0/2);
+Sfc=D0;
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+figure(7)
+hFig = figure(7);
+set(hFig, 'Position', [0 0 900 900])
+
+subplot(3,2,1)
+plot(t,Sfc,'LineWidth',2)
+grid on
+legend('S. Fourier Exp. Compleja','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-6 6 -2 2])
+Sfc=D0;
+t=(-T0/2):0.01:(T0/2);
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+subplot(3,2,2)
+f=@(t) t;
+plot(t,f(t),'r','LineWidth',1)
+grid on
+hold on
+plot(t,Sfc,'g','LineWidth',0.85)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-1.2 1.2 -1.2 1.2])
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+subplot(3,2,6)
+area(t,Ec.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+for i =-m:m
+    if i==0
+        absdn(cont)=D0;
+    end
+    
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+end
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+axis auto
+subplot(3,2,5)
+stem(W0*nn,angle(absdn),'LineWidth',2)
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+axis auto
+%% 
+% _ * 2.- * _ Encuentra la expresion de la serie de Fourier, para la señal f(t) 
+% = t^2 en el intervalo [−2, 2]. Observa que es una señ̃al par.
+
+clear
+
+figure(8)
+hFig = figure(8);
+set(hFig, 'Position', [0 0 900 900])
+f=@(u) u.^2;
+u=-2:0.01:2;
+plot(u,f(u))
+%% 
+% Realizando lo mismo que el anterior
+% 
+% a.-Serie de Fourier Trigonometrica Compacta
+
+syms n t m
+
+assume(n,["positive" "integer"])
+
+T0=4;
+w0=2*pi/T0;
+
+a0=(1/T0)*int(t^2,t,-2,2);
+an=simplify((2/T0)*int(t^2*cos(n*w0*t),t,-2,2));
+bn=simplify((4/T0)*int(t^2*sin(n*w0*t),t,-2,2));
+
+c0=abs(a0)
+Cn=sqrt(simplify(an^2+bn^2))
+cn=@(n) 16./((n.*pi).^2);
+fin=-atan(bn/an);
+
+if(a0<0)
+    
+fi0=pi
+else
+    fi0=0;
+end
+%como fin es o entre algo, se reescribira para adecuarla
+fin=@(n) pi.*((mod(n,1)==0)) -pi.*((mod(n,2)==0));
+%% 
+% Las Serie de Fourier queda de la siguiente forma:
+% 
+% $$\begin{array}{l}S_f \left(t\right)=C_0 \;\mathrm{cos}\left(\phi_0 \right)+\sum_{n=1}^{\infty 
+% } \left(C_n \;\mathrm{cos}\left(n\varpi_0 t\;+\phi_n \right)\right)\\=\frac{4}{3}+\sum_{n=1}^{\infty 
+% } \left(\frac{16{\left(-1\right)}^n }{n^2 \pi^2 }\;\mathrm{cos}\left(\frac{n\pi 
+% t\;}{2}+\phi_n \right)\right)\end{array}$$
+% 
+% Realizamos la grafica
+
+t0=-2;
+tf=2;
+armo=15;
+a=-10;
+b=10;
+
+sf=c0*cos(fi0);
+t=a:0.01:b;
+
+for m=1:armo
+    theta=w0*m*t + fin(m);
+    sf=sf + cn(m)*cos(theta);
+end
+figure(9)
+hFig = figure(9);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,sf,'LineWidth',2)
+grid on
+legend('Serie de Fourier','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+
+sf=c0*cos(fi0);
+t1=t0:0.01:tf;
+i=1;
+for m=1:armo
+    theta=w0*m*t1 + fin(m);
+    sf=sf + cn(m)*cos(theta);
+end
+
+subplot(3,2,2)
+plot(t1,f(t1),'b','LineWidth',2)
+grid on
+hold on
+plot(t1,sf,'LineWidth',2)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+nn=0:armo;
+axis auto
+
+subplot(3,2,4)
+e=f(t1)-sf;
+plot(t1,e,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+e=f(t1)-sf;
+area(t1,e.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+cnM=zeros(1,length(nn));
+cont=1;
+for i =-armo:armo
+    if i==0
+        cnM(cont)=c0;
+    end
+    cnM(cont)=cn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(w0*nn,cn(nn),'LineWidth',2)
+title('Espectro de magnitud Cn','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5)
+stem(w0*nn,fin(nn),'LineWidth',2)
+title('Espectro de fase, \phi_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+%% 
+% b. Serie de Fourier Exponencial Compleja:
+
+clear
+syms n t m
+assume(n,'integer')
+T0=4;
+W0=2*pi/T0;
+f2=t*t;
+Dn=simplify((1/T0)*int(f2*exp(-n*j*W0*t),-T0/2,T0/2))
+D0=simplify((1/T0)*int(f2,-T0/2,T0/2))
+%% 
+% Las Serie de Fourier queda de la siguiente forma:
+% 
+% $$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } D_n e^{\mathrm{nj}\omega_0 
+% t} =\frac{4}{3}+\sum_{n=-\infty }^{-1} \frac{8{\left(-1\right)}^n }{n^2 \pi^2 
+% }e^{\frac{\pi }{2}\mathrm{njt}} +\sum_1^{\infty } \frac{8{\left(-1\right)}^n 
+% }{n^2 \pi^2 }e^{\frac{\pi }{2}\mathrm{njt}}$$
+% 
+% Realizamos la grafica
+
+m=15;
+Dn=@(n) (8*(-1)^n)/((n*pi)^2);
+D0=4/3;
+t=(5)*(-T0/2):0.01:(5)*(T0/2);
+Sfc=D0;
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+figure(10)
+hFig = figure(10);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,'LineWidth',2)
+grid on
+legend('S. Fourier','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-10 10 -0.5 4.5])
+
+Sfc=D0;
+t=(-T0/2):0.01:(T0/2);
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+subplot(3,2,2)
+f2=@(t) t.*t;
+plot(t,f2(t),'r','LineWidth',1)
+grid on
+hold on
+plot(t,Sfc,'b','LineWidth',0.85)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-2 2 -0.5 4.5])
+subplot(3,2,4)
+Ec=f2(t)-Sfc;
+plot(t,Ec,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+for i =-m:m
+    if i==0
+        absdn(cont)=D0;
+    end
+    
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+axis auto
+subplot(3,2,5)
+stem(W0*nn,angle(absdn),'LineWidth',2)
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+axis auto
+%%  
+%% 
+%% Ejercicio del PR10 
+% Sea una señal $f\left(t\right)$ de periodo $T$, su descripción en el intervalo  
+% $\left(-\frac{T}{2},\frac{T}{2}\right)$ es:
+% 
+% $$f\left(t\right)={\textrm{ae}}^{-a\left|t\right|}$$
+% 
+% Su Serie de Fourier en dicho intervalo es:
+% 
+% $$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a} 
+% \cos \left(\pi n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t}$$
+% 
+% *a)* Determine el valor de $T$
+% 
+% *b*) ¿Cúal es el valor promedio de $f\left(t\right)$? (realice dos procedimientos). 
+% El valor promedio de una sẽnal periódica se define como:
+% 
+% $$V_p \left(f\right)=\frac{1}{T}\int_{<\textrm{To}>} f\left(t\right)\textrm{dt}$$
+% 
+% *c)* La componente de$f\left(t\right)$ en cierta frecuencia se puede ecpresar 
+% como $\textrm{Acos}\left(3\pi t\right)$. Determine el valor de $A$.
+% 
+% *d)* Calcule la Serie de Fourier para la señal $f\left(t\right)$ con el dato 
+% encontrado en *a)* y verifique que coincida con la proporcionada 
+% 
+% Solución:
+% 
+% Ya que $T$ es el perido de $f\left(t\right)$haremos la igualdad $T=\textrm{T0}$ 
+% esto con la finalidad de poder respetar la nomenclatura de la Serie de Fourier
+% 
+% *a)* 
+% 
+% De la $S_f \left(t\right)\;$que nos fue proporcionada podemos notar que $\omega_0  
+% =\pi$ ya que:
+% 
+% $$S_f \left(t\right)=D_0 +\sum_{n=-\infty }^{\infty } D_n e^{{\textrm{jn}\omega 
+% }_0 t} =\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a} \cos \left(\pi 
+% n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t} \;\;$$
+% 
+% Analizando las exponenciales
+% 
+% $${e^{\textrm{jn}\omega_0 t} \;=e}^{\textrm{jn}\pi t} \;\Longrightarrow \omega_0 
+% =\pi \;$$
+
+W0=pi;
+T0=2*pi/W0;
+T0
+%% 
+% *b)* Declaramos las variables simbolicas a utilizar y escribimos la integral
+
+syms a t T0
+f=a*exp(-a*abs(t))
+Vp=simplify(((1/T0)*int(f,-T0/2,T0/2)))
+%% 
+% Intentamos simplificar pero el software no da para más
+% 
+% Si ocupamos $T=2\;$que fue obtenido en el inciso anterior, el valor promedio 
+% de $f\left(t\right)$ es:
+
+Vp=subs(Vp,T0,2)
+%% 
+% *c)* Notemos que $\textrm{Acos}\left(3\pi t\right)$ tiene la forma $\textrm{Acos}\left(n\pi  
+% t\right)$ con $n=3$, dicha forma cumple con la forma Trigonometrica Compacta, 
+% por ende $\textrm{Acos}\left(3\pi t\right)$ 
+% 
+% seria el tercer armonico y $A$ seria el tercer coeficiente, al cual llamaremos  
+% $C_3$
+
+syms a n 
+assume(n,'real')
+assume(a,'real')
+Dn=(((a^2)*(1-exp(-a)*cos(pi*n)))/((a^2)+(pi*n)^2));
+C3=2*abs(subs(Dn,n,3))
+%% 
+% Si buscamos obtener $\phi_n \;$ usamos $\phi_n =\angle \left(D_n \right)$
+
+phi3=angle(subs(Dn,n,3))
+%% 
+% *d)* Usaremos $\textrm{T0}=2$.
+
+syms n t a 
+assume(n,{'integer'})
+assume(a,'real')
+T0=2;
+W0=pi;
+Dn=simplify((1/T0)*int(f*exp(-n*W0*j*t),-T0/2,T0/2))
+%% 
+% La expresión obtenida para los  $D_n$ es una expresión equivalente a la proporcionada
+% 
+% Para poder graficar haremos $a=2$
+
+Dn=subs(Dn,a,2)
+%% 
+% Con lo que la Serie de Fourier exponenial compleja queda de la siguiente forma
+% 
+% $$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } D_n e^{\textrm{jn}\pi t} 
+% =\sum_{n=-\infty }^{\infty } \frac{4e^{-2} \left(e^2 -{\left(-1\right)}^n \right)}{4+\pi^2 
+% n^2 }e^{\textrm{jn}\pi t}$$
+% 
+% Para obtener la Trigonometrica Compacta.
+
+Cn=2*abs(simplify((Dn)));
+Cn=simplify(Cn)
+Phi_n=angle(Dn)
+C0=abs(subs(Dn,n,0))
+Phi_0=angle(subs(Dn,n,0))
+%% 
+% Utilizando los $C_n ,{\;\phi }_{n\;} ,\;\phi_0$ y $C_0$ calculados ya podemos 
+% expresar la serie de Fourier en su forma Trigonometrica Compacta
+% 
+% $$S_f \left(t\right)=C_0 \cos \left(\phi_0 \right)+\sum_{n=1}^{\infty } C_n 
+% \cos \left(n\omega_0 t+\phi_n \right)=e^{-2} \left(e^2 -1\right)+\sum_{n=1}^{\infty 
+% } \frac{{8e}^{-2} \left(e^{-2} -{\left(-1\right)}^n \right)}{4+\pi^2 n^2 }\cos 
+% \left(n\pi t\right)$$
+% 
+% Existe algo llamado Error que se define de la siguiente manera
+% 
+% $$E=f\left(t\right)-S_f \left(t\right)$$
+% 
+% El cual tambien sera graficado
+% 
+% _Exponencial Compleja_
+
+T0=2;
+W0=2*pi/T0;
+a=2;
+m=15;
+f=@(t) a*exp(-a*abs(t));
+Dn=@(n) ((4*exp(-2)*(exp(2)-(-1)^n))/(4+(n*pi)^2));
+D0=exp(-2)*(exp(2)-1);
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+Sfc=D0;
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+figure (11);
+hFig = figure(11);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sfc,'LineWidth',2)
+grid on
+legend('S. Fourier Exp. Compleja','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-5 5 -0.5 2.5])
+
+Sfc=D0;
+t=(-T0/2):0.0001:(T0/2);
+for n=1:m
+    Sfc=Sfc+Dn(-n)*exp(W0*-n*t*j)+Dn(n)*exp(W0*n*t*j);
+end
+
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',0.75)
+grid on
+hold on
+plot(t,Sfc,'b','LineWidth',1.5)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+
+subplot(3,2,4)
+Ec=f(t)-Sfc;
+plot(t,Ec,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Ec.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+nn=-m:m;
+absdn=zeros(1,length(nn));
+cont=1;
+for i =-m:m
+    if i==0
+        absdn(cont)=D0;
+    end
+    
+    absdn(cont)=Dn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(W0*nn,abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5) % % 
+stem(W0*nn,angle(absdn),'LineWidth',2) % % 
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+%% 
+% _Trigonometrica compacta_
+
+T0=2;
+W0=2*pi/T0;
+a=2;
+m=15;
+f=@(t) a*exp(-a*abs(t));
+Cn=@(n) ((8*exp(-2)*(exp(2)-(-1)^n))/(4+(n*pi)^2));
+C0=exp(-2)*(exp(2)-1);
+t= (2.5)*(-T0):0.001:(2.5)*(T0);
+phin=0;
+phi0=0;
+Sft=C0*cos(phi0);
+for n=1:m
+    Sft=Sft+Cn(n)*cos(n*pi*t+phin);
+end
+figure (12);
+hFigg = figure(12);
+set(hFigg, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,Sft,'LineWidth',2)
+grid on
+legend('S. Fourier Trigo. Compacta','Location','southeast')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([-5 5 -0.5 2.5])
+
+Sft=D0;
+t=(-T0/2):0.0001:(T0/2);
+for n=1:m
+    Sft=Sft+Cn(n)*cos(n*pi*t+phin);
+end
+
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',0.75)
+grid on
+hold on
+plot(t,Sft,'b','LineWidth',1.5)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+
+subplot(3,2,4)
+Et=f(t)-Sft;
+plot(t,Et,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+subplot(3,2,6)
+area(t,Et.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+
+nn=0:m;
+abscn=zeros(1,length(nn));
+cont=1;
+for i =0:m
+    if i==0
+        abscn(cont)=C0;
+    end
+    
+    abscn(cont)=Cn(i);
+    cont=cont+1;
+end
+nn=0:m;
+absdnn=zeros(1,length(nn));
+cont=1;
+for i =0:m
+    if i==0
+        absdnn(cont)=D0;
+    end
+    
+    absdnn(cont)=Dn(i);
+    cont=cont+1;
+end
+
+
+subplot(3,2,3)
+stem(W0*nn,abs(abscn),'LineWidth',2)
+title('Espectro de magnitud C_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+
+subplot(3,2,5) % % 
+stem(W0*nn,angle(absdnn),'LineWidth',2) % % 
+title('Espectro de fase \phi_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+##### SOURCE END #####
+--></body></html>
