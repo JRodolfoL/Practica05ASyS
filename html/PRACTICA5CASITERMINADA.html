@@ -67,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</h1><!--introduction--><p>Integrantes:</p><div><ul><li>Arellano Paz Angel Ulises</li><li>Cardoso Arias Javier</li><li>Gachuz Hern&aacute;ndez Karla Denisse</li><li>Garc&iacute;a Arteaga Alejandro</li><li>L&oacute;pez Galv&aacute;n Jos&eacute; Rodolfo</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Ejercicio 1</a></li><li><a href="#3">Ejemplo 6.2 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. Utilizar A =1.</a></li><li><a href="#5">Serie de Fourier Trigonometrica compacta</a></li><li><a href="#6">Ejercicio 2</a></li><li><a href="#7">PR08</a></li><li><a href="#19">Ejercicio del PR10</a></li></ul></div><h2 id="1">Objetivos</h2><div><ul><li>Realizar gr&aacute;ficas de series de Fourier exponenciales y trigonom&eacute;tricas en tiempo continuo</li><li>Manipulaci&oacute;n de instrucciones en MATLAB</li></ul></div><h2 id="2">Ejercicio 1</h2><h2 id="3">Ejemplo 6.2 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. Utilizar A =1.</h2><p>EXAMPLE 6.2 Compact Trigonometric Fourier Series of a Periodic TriangleWave Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in Fig. 6.4a, and sketch the amplitude and phase spectra for x(t).</p><p>Serie de Fourier compleja</p><pre class="codeinput">clear
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</h1><!--introduction--><p>Integrantes:</p><div><ul><li>Arellano Paz Angel Ulises</li><li>Cardoso Arias Javier</li><li>Gachuz Hern&aacute;ndez Karla Denisse</li><li>Garc&iacute;a Arteaga Alejandro</li><li>L&oacute;pez Galv&aacute;n Jos&eacute; Rodolfo</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Ejercicio 1</a></li><li><a href="#5">Ejercicio 2</a></li><li><a href="#6">PR08</a></li><li><a href="#18">Ejercicio del PR10</a></li></ul></div><h2 id="1">Objetivos</h2><div><ul><li>Realizar gr&aacute;ficas de series de Fourier exponenciales y trigonom&eacute;tricas en tiempo continuo</li><li>Manipulaci&oacute;n de instrucciones en MATLAB</li></ul></div><h2 id="2">Ejercicio 1</h2><p>Ejemplo 6.2 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. Utilizar A =1. EXAMPLE 6.2 Compact Trigonometric Fourier Series of a Periodic TriangleWave Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in Fig. 6.4a, and sketch the amplitude and phase spectra for x(t).</p><p>Serie de Fourier compleja</p><pre class="codeinput">clear
 sympref(<span class="string">'HeavisideAtOrigin'</span>,1);
 u=@(t) heaviside(t);
 d0=0;
@@ -76,10 +76,10 @@ t0=-0.5;
 tf=1.5;
 f=@(t) (2*t.*(u(t+0.5)-u(t-0.5)))-(2*(1-t).*(-u(t-0.5)+u(t-1.5)));
 armo=15;
-a=-2;
-b=2;
+a=-5;
+b=5;
 sfc(t0,tf,dn,d0,f,armo,a,b)
-</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_01.png" alt=""> <h2 id="5">Serie de Fourier Trigonometrica compacta</h2><pre class="language-matlab">Cn=2*abs(simplify((dn)));
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_01.png" alt=""> <p>Serie de Fourier Trigonometrica compacta</p><pre class="language-matlab">Cn=2*abs(simplify((dn)));
 </pre><pre class="language-matlab">Cn=simplify(Cn);
 </pre><pre class="language-matlab">Phi_n=angle(dn);
 </pre><pre class="language-matlab">C0=0;
@@ -90,7 +90,7 @@ phin=pi;
 phi0=0;
 sftc(t0,tf,dn,d0,f,armo,cn,c0,phin,phi0)
 </pre><pre class="codeoutput">Warning: Ignoring extra legend entries. 
-</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_02.png" alt=""> <h2 id="6">Ejercicio 2</h2><p>Ejemplo 6.4 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. EXAMPLE 6.4 Find the compact trigonometric Fourier series for the square-pulse periodic signal</p><pre class="codeinput">T0=2*pi;
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_02.png" alt=""> <h2 id="5">Ejercicio 2</h2><p>Ejemplo 6.4 Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos. EXAMPLE 6.4 Find the compact trigonometric Fourier series for the square-pulse periodic signal</p><pre class="codeinput">T0=2*pi;
 W0=2*pi/T0;
 m=15;
 f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
@@ -201,7 +201,6 @@ phi0=0;
 phin=@(n) pi*(mod(n,3)==0) + pi*(mod(n,4)==0) + pi*(n==7)+ pi*(n==11) - pi*(n==9) - pi*(n==6)- pi*(n==12);
 Sft=C0*cos(phi0);
 
-t=(-T0/2):0.0001:(T0/2);
 <span class="keyword">for</span> n=1:m
   Sft=Sft+Cn(n)*cos((n*W0*t) + phin(n));
 <span class="keyword">end</span>
@@ -213,7 +212,7 @@ plot(t,Sft,<span class="string">'LineWidth'</span>,2)
 grid <span class="string">on</span>
 legend(<span class="string">'S. Fourier Trigo. Compacta'</span>,<span class="string">'Location'</span>,<span class="string">'southeast'</span>)
 xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
-axis([-T0/2 T0/2 -0.5 1.5])
+axis([-2.5*T0 2.5*T0 -0.5 1.5])
 Sft=abs(C0);
 t=(-T0/2):0.0001:(T0/2);
 
@@ -280,7 +279,7 @@ stem(W0*nn,angle(absdnn),<span class="string">'LineWidth'</span>,2) <span class=
 title(<span class="string">'Espectro de fase \phi_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
 xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
 grid <span class="string">on</span>
-</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_03.png" alt=""> <img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_04.png" alt=""> <img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_05.png" alt=""> <h2 id="7">PR08</h2><p>Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos (hay dos series en esta tarea).</p><p>_ <b>1.-</b> _ Encuentra la expresion de la serie de Fourier, para la se&ntilde;al f(t) = t, en el intervalo [&#8722;1, 1].Observa que es una se&ntilde;al impar.</p><pre class="codeinput">figure(5)
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_03.png" alt=""> <img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_04.png" alt=""> <img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_05.png" alt=""> <h2 id="6">PR08</h2><p>Agregar la expresi&oacute;n an&aacute;litica de la serie en ambos formatos (hay dos series en esta tarea).</p><p>_ <b>1.-</b> _ Encuentra la expresion de la serie de Fourier, para la se&ntilde;al f(t) = t, en el intervalo [&#8722;1, 1].Observa que es una se&ntilde;al impar.</p><pre class="codeinput">figure(5)
 hFig = figure(5);
 set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
 f=@(u) u;
@@ -686,7 +685,7 @@ title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class
 xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
 grid <span class="string">on</span>
 axis <span class="string">auto</span>
-</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_11.png" alt=""> <h2 id="19">Ejercicio del PR10</h2><p>Sea una se&ntilde;al <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;"> de periodo <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;">, su descripci&oacute;n en el intervalo <img src="PRACTICA5CASITERMINADA_eq13626939804765662702.png" alt="$\left(-\frac{T}{2},\frac{T}{2}\right)$" style="width:50px;height:18px;"> es:</p><p><img src="PRACTICA5CASITERMINADA_eq16205871781469351108.png" alt="$$f\left(t\right)={\textrm{ae}}^{-a\left|t\right|}$$" style="width:82px;height:18px;"></p><p>Su Serie de Fourier en dicho intervalo es:</p><p><img src="PRACTICA5CASITERMINADA_eq02516644016229542297.png" alt="$$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a}&#xA;\cos \left(\pi n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t}$$" style="width:249px;height:41px;"></p><p><b>a)</b> Determine el valor de <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;"></p><p><b>b</b>) &iquest;C&uacute;al es el valor promedio de <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;">? (realice dos procedimientos). El valor promedio de una se&#771;nal peri&oacute;dica se define como:</p><p><img src="PRACTICA5CASITERMINADA_eq07239622747548459175.png" alt="$$V_p \left(f\right)=\frac{1}{T}\int_{<\textrm{To}&gt;} f\left(t\right)\textrm{dt}$$" style="width:160px;height:34px;"></p><p><b>c)</b> La componente de$f\left(t\right)$ en cierta frecuencia se puede ecpresar como <img src="PRACTICA5CASITERMINADA_eq09227379482330864126.png" alt="$\textrm{Acos}\left(3\pi t\right)$" style="width:65px;height:15px;">. Determine el valor de <img src="PRACTICA5CASITERMINADA_eq05147331747641807187.png" alt="$A$" style="width:10px;height:11px;">.</p><p><b>d)</b> Calcule la Serie de Fourier para la se&ntilde;al <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;"> con el dato encontrado en <b>a)</b> y verifique que coincida con la proporcionada</p><p>Soluci&oacute;n:</p><p>Ya que <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;"> es el perido de $f\left(t\right)$haremos la igualdad <img src="PRACTICA5CASITERMINADA_eq06315040559885451834.png" alt="$T=\textrm{T0}$" style="width:48px;height:11px;"> esto con la finalidad de poder respetar la nomenclatura de la Serie de Fourier</p><p><b>a)</b></p><p>De la $S_f \left(t\right)\;$que nos fue proporcionada podemos notar que <img src="PRACTICA5CASITERMINADA_eq12106556665514577580.png" alt="$\omega_0 =\pi$" style="width:43px;height:10px;"> ya que:</p><p><img src="PRACTICA5CASITERMINADA_eq16874137546865367517.png" alt="$$S_f \left(t\right)=D_0 +\sum_{n=-\infty }^{\infty } D_n e^{{\textrm{jn}\omega&#xA;}_0 t} =\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a} \cos \left(\pi&#xA;n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t} \;\;$$" style="width:394px;height:41px;"></p><p>Analizando las exponenciales</p><p><img src="PRACTICA5CASITERMINADA_eq12445456109505927490.png" alt="$${e^{\textrm{jn}\omega_0 t} \;=e}^{\textrm{jn}\pi t} \;\Longrightarrow \omega_0&#xA;=\pi \;$$" style="width:167px;height:25px;"></p><pre class="codeinput">W0=pi;
+</pre><img vspace="5" hspace="5" src="PRACTICA5CASITERMINADA_11.png" alt=""> <h2 id="18">Ejercicio del PR10</h2><p>Sea una se&ntilde;al <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;"> de periodo <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;">, su descripci&oacute;n en el intervalo <img src="PRACTICA5CASITERMINADA_eq13626939804765662702.png" alt="$\left(-\frac{T}{2},\frac{T}{2}\right)$" style="width:50px;height:18px;"> es:</p><p><img src="PRACTICA5CASITERMINADA_eq16205871781469351108.png" alt="$$f\left(t\right)={\textrm{ae}}^{-a\left|t\right|}$$" style="width:82px;height:18px;"></p><p>Su Serie de Fourier en dicho intervalo es:</p><p><img src="PRACTICA5CASITERMINADA_eq02516644016229542297.png" alt="$$S_f \left(t\right)=\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a}&#xA;\cos \left(\pi n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t}$$" style="width:249px;height:41px;"></p><p><b>a)</b> Determine el valor de <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;"></p><p><b>b</b>) &iquest;C&uacute;al es el valor promedio de <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;">? (realice dos procedimientos). El valor promedio de una se&#771;nal peri&oacute;dica se define como:</p><p><img src="PRACTICA5CASITERMINADA_eq07239622747548459175.png" alt="$$V_p \left(f\right)=\frac{1}{T}\int_{<\textrm{To}&gt;} f\left(t\right)\textrm{dt}$$" style="width:160px;height:34px;"></p><p><b>c)</b> La componente de$f\left(t\right)$ en cierta frecuencia se puede ecpresar como <img src="PRACTICA5CASITERMINADA_eq09227379482330864126.png" alt="$\textrm{Acos}\left(3\pi t\right)$" style="width:65px;height:15px;">. Determine el valor de <img src="PRACTICA5CASITERMINADA_eq05147331747641807187.png" alt="$A$" style="width:10px;height:11px;">.</p><p><b>d)</b> Calcule la Serie de Fourier para la se&ntilde;al <img src="PRACTICA5CASITERMINADA_eq04206155091802048698.png" alt="$f\left(t\right)$" style="width:26px;height:15px;"> con el dato encontrado en <b>a)</b> y verifique que coincida con la proporcionada</p><p>Soluci&oacute;n:</p><p>Ya que <img src="PRACTICA5CASITERMINADA_eq14047577632175690031.png" alt="$T$" style="width:11px;height:10px;"> es el perido de $f\left(t\right)$haremos la igualdad <img src="PRACTICA5CASITERMINADA_eq06315040559885451834.png" alt="$T=\textrm{T0}$" style="width:48px;height:11px;"> esto con la finalidad de poder respetar la nomenclatura de la Serie de Fourier</p><p><b>a)</b></p><p>De la $S_f \left(t\right)\;$que nos fue proporcionada podemos notar que <img src="PRACTICA5CASITERMINADA_eq12106556665514577580.png" alt="$\omega_0 =\pi$" style="width:43px;height:10px;"> ya que:</p><p><img src="PRACTICA5CASITERMINADA_eq16874137546865367517.png" alt="$$S_f \left(t\right)=D_0 +\sum_{n=-\infty }^{\infty } D_n e^{{\textrm{jn}\omega&#xA;}_0 t} =\sum_{n=-\infty }^{\infty } \frac{a^2 \left(1-e^{-a} \cos \left(\pi&#xA;n\right)\right)}{a^2 +n^2 \pi^2 }e^{\textrm{jn}\pi t} \;\;$$" style="width:394px;height:41px;"></p><p>Analizando las exponenciales</p><p><img src="PRACTICA5CASITERMINADA_eq12445456109505927490.png" alt="$${e^{\textrm{jn}\omega_0 t} \;=e}^{\textrm{jn}\pi t} \;\Longrightarrow \omega_0&#xA;=\pi \;$$" style="width:167px;height:25px;"></p><pre class="codeinput">W0=pi;
 T0=2*pi/W0;
 T0
 </pre><pre class="codeoutput">
@@ -952,7 +951,7 @@ grid <span class="string">on</span>
 % * Realizar gráficas de series de Fourier exponenciales y trigonométricas en tiempo continuo
 % * Manipulación de instrucciones en MATLAB
 %% Ejercicio 1
-%% Ejemplo 6.2 Agregar la expresión análitica de la serie en ambos formatos. Utilizar A =1.
+% Ejemplo 6.2 Agregar la expresión análitica de la serie en ambos formatos. Utilizar A =1.
 % EXAMPLE 6.2 Compact Trigonometric Fourier Series of a Periodic
 % TriangleWave
 % Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in
@@ -969,10 +968,11 @@ t0=-0.5;
 tf=1.5;
 f=@(t) (2*t.*(u(t+0.5)-u(t-0.5)))-(2*(1-t).*(-u(t-0.5)+u(t-1.5))); 
 armo=15;
-a=-2;
-b=2;
+a=-5;
+b=5;
 sfc(t0,tf,dn,d0,f,armo,a,b)
-%% Serie de Fourier Trigonometrica compacta
+%%
+% Serie de Fourier Trigonometrica compacta
 %
 %   Cn=2*abs(simplify((dn)));
 %
@@ -1106,7 +1106,6 @@ phi0=0;
 phin=@(n) pi*(mod(n,3)==0) + pi*(mod(n,4)==0) + pi*(n==7)+ pi*(n==11) - pi*(n==9) - pi*(n==6)- pi*(n==12);
 Sft=C0*cos(phi0);
 
-t=(-T0/2):0.0001:(T0/2);
 for n=1:m
   Sft=Sft+Cn(n)*cos((n*W0*t) + phin(n));
 end
@@ -1118,7 +1117,7 @@ plot(t,Sft,'LineWidth',2)
 grid on
 legend('S. Fourier Trigo. Compacta','Location','southeast')
 xlabel('t','FontWeight','bold','FontSize',16)
-axis([-T0/2 T0/2 -0.5 1.5])
+axis([-2.5*T0 2.5*T0 -0.5 1.5])
 Sft=abs(C0);
 t=(-T0/2):0.0001:(T0/2);
 
